@@ -3,7 +3,7 @@ package payment;
 public class CreditCardPaymentStrategy implements Payment {
 
     @Override
-    public void pay(double price) {
-        System.out.println("Card payment completed! ( -" + price + "$ )");
+    public String pay(double price) {
+        return "Card payment completed! ( -" + price + "$ )";
     }
 }

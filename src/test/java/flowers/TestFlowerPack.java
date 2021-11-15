@@ -1,3 +1,5 @@
+package flowers;
+
 import flowerstore.Flower;
 import flowerstore.FlowerPack;
 import org.junit.jupiter.api.BeforeEach;

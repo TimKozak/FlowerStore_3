@@ -1,26 +1,43 @@
 package order;
 
-import delivery.Delivery;
-import flowerstore.Item;
-import payment.Payment;
+import delivery.*;
+import flowerstore.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import users.*;
+import payment.*;
 import java.util.LinkedList;
 
+@AllArgsConstructor @Getter @Setter
 public class Order {
-    private LinkedList<Item> items = new LinkedList<>();
+    private LinkedList<Item> flowers = new LinkedList<>();
+    private LinkedList<User> users = new LinkedList<>();
     private Payment payment;
     private Delivery delivery;
+    private String status = "No status";
 
-    public void setPaymentStrategy(Payment paymentMethod){
+    public Order() {
+    }
+
+    public Order(LinkedList<Item> flowers, Payment payment, Delivery delivery) {
+        this.flowers = flowers;
+        this.payment = payment;
+        this.delivery = delivery;
+    }
+
+    public void setPaymentStrategy(Payment paymentMethod) {
         payment = paymentMethod;
     }
-    public void setDeliveryStrategy(Delivery deliveryMethod){
+
+    public void setDeliveryStrategy(Delivery deliveryMethod) {
         delivery = deliveryMethod;
     }
 
     public double calculateTotalPrice() {
         double totalPrice = 0;
 
-        for (Item item : items) {
+        for (Item item : flowers) {
             totalPrice += item.getPrice();
         }
 
@@ -30,13 +47,32 @@ public class Order {
     public void processOrder() {
         double price = this.calculateTotalPrice();
         payment.pay(price);
-        delivery.deliver(items);
+        delivery.deliver(flowers);
     }
 
-    public void addItem(Item item){
-        items.add(item);
+    public void addItem(Item item) {
+        this.flowers.add(item);
     }
-    public void removeItem(Item item){
-        items.remove(item);
+
+    public void removeItem(Item item) {
+        this.flowers.remove(item);
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
+    public void removeUser(User user) {
+        this.users.remove(user);
+    }
+
+    public void notifyUsers() {
+        for (User user : users) {
+            user.update(this.status);
+        }
+    }
+
+    public void order() {
+        notifyUsers();
     }
 }

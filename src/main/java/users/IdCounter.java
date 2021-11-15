@@ -4,5 +4,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class IdCounter {
-    private int id = 0;
+    static int lastId = 0;
+
+    public static int addNewId() {
+        lastId++;
+        return lastId;
+    }
 }

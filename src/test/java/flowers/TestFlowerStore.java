@@ -1,3 +1,5 @@
+package flowers;
+
 import flowerstore.Flower;
 import flowerstore.FlowerStore;
 import flowerstore.FlowerType;

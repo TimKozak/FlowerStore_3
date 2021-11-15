@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DHLDeliveryStartegy implements Delivery {
     @Override
-    public void deliver(List<Item> items) {
-        System.out.println("Your order is being delivered by DHL");
+    public String deliver(List<Item> items) {
+        return "Your order is being delivered by DHL";
     }
 }

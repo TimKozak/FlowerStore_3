@@ -1,5 +1,5 @@
 package payment;
 
 public interface Payment {
-    void pay(double price);
+    String pay(double price);
 }
